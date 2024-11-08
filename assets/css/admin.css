@@ -1,0 +1,131 @@
+.countdown-form {
+    max-width: 800px;
+    margin: 20px 0;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+
+.form-field {
+    margin-bottom: 20px;
+}
+
+.form-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.form-field input[type="text"],
+.form-field input[type="number"] {
+    width: 100%;
+    max-width: 400px;
+}
+
+.duration-field .duration-inputs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.duration-inputs input[type="number"] {
+    width: 100px;
+}
+
+.duration-inputs select {
+    width: 120px;
+}
+
+#product-search {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 10px;
+}
+
+#search-results {
+    margin-top: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.product-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.product-item:hover {
+    background: #f9f9f9;
+}
+
+.product-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+#selected-products {
+    margin-top: 20px;
+}
+
+.selected-product {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+    background: #fff;
+}
+
+.selected-product img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.selected-product .product-info {
+    flex: 1;
+}
+
+.selected-product h4 {
+    margin: 0 0 5px 0;
+}
+
+.remove-product {
+    background: none;
+    border: none;
+    color: #dc3232;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 0 10px;
+}
+
+.remove-product:hover {
+    opacity: 0.8;
+}
+
+.shortcodes-info {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.shortcodes-info code {
+    background: #fff;
+    padding: 3px 6px;
+}
+
+.submit-wrapper {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
