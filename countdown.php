@@ -62,50 +62,63 @@ class Single_Countdown_Products {
 
     public function countdown_shortcode() {
         $countdown_data = get_option($this->option_name);
-        if (!$countdown_data || empty($countdown_data['end_time'])) return '';
+        if (!$countdown_data || empty($countdown_data['end_time'])) {
+            return '';
+        }
 
         $timezone = wp_timezone();
         $end_time = new DateTime($countdown_data['end_time'], $timezone);
         $now = new DateTime('now', $timezone);
 
-        if ($end_time <= $now) return '';
+        if ($end_time <= $now) {
+            return '';
+        }
 
+        // Creamos un array asociativo con los datos necesarios
         $data = array(
             'endTime' => $end_time->format('c'),
             'serverTime' => $now->format('c')
         );
 
+        // Usamos wp_json_encode en lugar de json_encode directo
+        $json_data = wp_json_encode($data);
+        
+        // Escapamos el JSON para asegurar que es seguro en HTML
+        $escaped_data = esc_attr($json_data);
+
         return sprintf(
             '<div class="wc-countdown" data-countdown="%s"></div>',
-            esc_attr(wp_json_encode($data))
+            $escaped_data
         );
     }
 
-    public function countdown_data_shortcode($atts) {
-        $atts = shortcode_atts(array(
-            'format' => 'array'
-        ), $atts);
-    
+    public function countdown_data_shortcode() {
         $countdown_data = get_option($this->option_name);
         if (!$countdown_data || empty($countdown_data['end_time'])) {
-            return ($atts['format'] === 'json') ? '{}' : array();
+            return wp_json_encode(array());
         }
-    
+
         $timezone = wp_timezone();
         $end_time = new DateTime($countdown_data['end_time'], $timezone);
         $now = new DateTime('now', $timezone);
-    
+
         if ($end_time <= $now) {
-            return ($atts['format'] === 'json') ? '{}' : array();
+            return wp_json_encode(array());
         }
-    
+
+        // Aseguramos que product_ids sea un array
+        $product_ids = !empty($countdown_data['product_ids']) ? 
+            explode(',', $countdown_data['product_ids']) : 
+            array();
+
         $data = array(
-            'product_ids' => explode(',', $countdown_data['product_ids']),
+            'product_ids' => $product_ids,
             'end_time' => $end_time->format('c')
         );
-    
+
         return wp_json_encode($data);
     }
+    
 
     public function search_sale_products() {
         check_ajax_referer('countdown_nonce', 'nonce');
